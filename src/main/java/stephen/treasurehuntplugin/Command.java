@@ -4,9 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
@@ -27,11 +29,18 @@ public class Command implements CommandExecutor {
             if (player.isOp()) {
                 Location treasureLocation = generateTreasureLocation(player.getLocation());
                 if (treasureLocation != null) {
-                    Block treasureChest = treasureLocation.getBlock();
-                    treasureChest.setType(Material.CHEST);
+                    Block block = treasureLocation.getBlock();
+                    block.setType(Material.CHEST);
+
+                    Chest treasureChest = (Chest) block.getState();
+
+                    Inventory inventory = treasureChest.getInventory();
                     ItemStack[] rewards = generateRandomRewards();
-                    treasureChest.getWorld().dropItemNaturally(treasureChest.getLocation(), rewards[0]);
-                    treasureChest.getWorld().dropItemNaturally(treasureChest.getLocation(), rewards[1]);
+
+                    inventory.addItem(rewards);
+
+                    plugin.getLogger().info(treasureChest.getLocation().toString());
+
                     plugin.treasureLocations.put(treasureChest.getLocation(), rewards);
                     player.sendMessage("A treasure hunt has begun! Find the hidden treasure chest.");
                 } else {

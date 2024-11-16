@@ -1,8 +1,6 @@
 package stephen.treasurehuntplugin;
 
 import org.bukkit.Location;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 

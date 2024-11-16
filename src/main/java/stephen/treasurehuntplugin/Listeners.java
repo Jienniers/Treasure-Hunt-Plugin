@@ -27,8 +27,6 @@ public class Listeners implements Listener {
                 player.getInventory().addItem(item);
             }
             player.sendMessage("You found treasure!");
-            plugin.treasureLocations.remove(block.getLocation());
-            block.setType(Material.AIR);
         }
     }
 
