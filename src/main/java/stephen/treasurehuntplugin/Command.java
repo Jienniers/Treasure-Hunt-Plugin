@@ -51,13 +51,24 @@ public class Command implements CommandExecutor {
         return true;
     }
 
+
     private Location generateTreasureLocation(Location playerLocation) {
         Random random = new Random();
         int radius = 50;
-        int x = playerLocation.getBlockX() + random.nextInt(radius * 2) - radius;
-        int z = playerLocation.getBlockZ() + random.nextInt(radius * 2) - radius;
-        int y = playerLocation.getWorld().getHighestBlockYAt(x, z);
-        return new Location(playerLocation.getWorld(), x, y, z);
+
+        while (true) {
+            int x = playerLocation.getBlockX() + random.nextInt(radius * 2) - radius;
+            int z = playerLocation.getBlockZ() + random.nextInt(radius * 2) - radius;
+            int y = playerLocation.getWorld().getHighestBlockYAt(x, z);
+
+            Location location = new Location(playerLocation.getWorld(), x, y, z);
+
+            Block blockBelow = location.clone().subtract(0, 1, 0).getBlock();
+
+            if (blockBelow.getType().isSolid()) {
+                return location;
+            }
+        }
     }
 
     private ItemStack[] generateRandomRewards() {
