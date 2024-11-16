@@ -26,12 +26,8 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
         if (block != null && plugin.treasureLocations.containsKey(block.getLocation())) {
-            ItemStack[] rewards = plugin.treasureLocations.get(block.getLocation());
-            for (ItemStack item : rewards) {
-                player.getInventory().addItem(item);
-            }
             player.sendMessage("You found treasure!");
-
+            
             FireworkCeleberation(player);
         }
     }

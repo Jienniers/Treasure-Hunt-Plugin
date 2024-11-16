@@ -71,10 +71,55 @@ public class Command implements CommandExecutor {
         }
     }
 
+
     private ItemStack[] generateRandomRewards() {
-        ItemStack[] rewards = new ItemStack[2];
-        rewards[0] = new ItemStack(Material.DIAMOND, 3);
-        rewards[1] = new ItemStack(Material.GOLD_INGOT, 5);
+        Random random = new Random();
+
+        Material[] commonItems = {
+                Material.DIAMOND_SWORD,
+                Material.DIAMOND,
+                Material.GOLD_INGOT,
+                Material.EMERALD,
+                Material.ENCHANTED_GOLDEN_APPLE,
+                Material.COOKED_BEEF,
+                Material.COOKED_PORKCHOP,
+                Material.GOLDEN_CARROT,
+                Material.ENCHANTED_BOOK,
+                Material.ENDER_PEARL,
+                Material.OBSIDIAN,
+                Material.LAPIS_LAZULI,
+                Material.QUARTZ,
+                Material.REDSTONE,
+                Material.GLOWSTONE_DUST,
+                Material.SLIME_BALL
+        };
+
+        Material[] rareItems = {
+                Material.NETHER_STAR,
+                Material.ELYTRA,
+                Material.DRAGON_EGG,
+                Material.ENCHANTED_GOLDEN_APPLE,
+                Material.TOTEM_OF_UNDYING,
+                Material.TRIDENT,
+                Material.SHULKER_BOX,
+                Material.BEACON
+        };
+
+        int numberOfRewards = 3;
+        ItemStack[] rewards = new ItemStack[numberOfRewards];
+
+        for (int i = 0; i < numberOfRewards; i++) {
+            ItemStack item;
+
+            if (random.nextInt(100) < 80) {
+                item = new ItemStack(commonItems[random.nextInt(commonItems.length)], random.nextInt(3) + 1);
+            } else {
+                item = new ItemStack(rareItems[random.nextInt(rareItems.length)], 1);
+            }
+
+            rewards[i] = item;
+        }
+
         return rewards;
     }
 }
