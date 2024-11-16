@@ -1,0 +1,7 @@
+name: TreasureHuntPlugin
+version: '${project.version}'
+main: stephen.treasurehuntplugin.TreasureHuntPlugin
+api-version: '1.18'
+commands:
+  startquest:
+    description: Starts the quest
