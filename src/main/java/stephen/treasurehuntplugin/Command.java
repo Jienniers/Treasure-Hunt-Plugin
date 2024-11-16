@@ -5,13 +5,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
@@ -41,7 +37,7 @@ public class Command implements CommandExecutor {
 
                     inventory.addItem(rewards);
 
-                    plugin.getLogger().info(treasureChest.getLocation().toString());
+                    plugin.getLogger().info("Here is the Treasure Location: "+treasureChest.getLocation());
 
                     plugin.treasureLocations.put(treasureChest.getLocation(), rewards);
                     player.sendMessage("A treasure hunt has begun! Find the hidden treasure chest.");
