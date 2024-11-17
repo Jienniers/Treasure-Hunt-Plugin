@@ -5,6 +5,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,10 +27,19 @@ public class Listeners implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
-        if (block != null && plugin.treasureLocations.containsKey(block.getLocation())) {
-            player.sendMessage(ChatColor.GREEN+"You found treasure!");
 
-            FireworkCeleberation(player);
+        if (block != null) {
+            BlockState blockState = block.getState();
+
+            if (blockState instanceof Chest) {
+                Chest chest = (Chest) blockState;
+
+                if (plugin.treasures.containsKey(chest)) {
+                    player.sendMessage(ChatColor.GREEN+"You found treasure!");
+
+                    FireworkCeleberation(player);
+                }
+            }
         }
     }
 

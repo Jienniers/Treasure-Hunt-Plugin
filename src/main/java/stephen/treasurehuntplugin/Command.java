@@ -40,7 +40,7 @@ public class Command implements CommandExecutor {
 
                 plugin.getLogger().info("Here is the Treasure Location: "+treasureChest.getLocation());
 
-                plugin.treasureLocations.put(treasureChest.getLocation(), rewards);
+                plugin.treasures.put(treasureChest, rewards);
 
                 new BukkitRunnable(){
                     int countdown = 5;
