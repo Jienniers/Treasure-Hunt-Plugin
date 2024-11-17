@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
@@ -26,27 +27,42 @@ public class Command implements CommandExecutor {
             Player player = (Player) sender;
             if (player.isOp()) {
                 Location treasureLocation = generateTreasureLocation(player.getLocation());
-                if (treasureLocation != null) {
-                    Block block = treasureLocation.getBlock();
-                    block.setType(Material.CHEST);
 
-                    Chest treasureChest = (Chest) block.getState();
+                Block block = treasureLocation.getBlock();
+                block.setType(Material.CHEST);
 
-                    Inventory inventory = treasureChest.getInventory();
-                    ItemStack[] rewards = generateRandomRewards();
+                Chest treasureChest = (Chest) block.getState();
 
-                    inventory.addItem(rewards);
+                Inventory inventory = treasureChest.getInventory();
+                ItemStack[] rewards = generateRandomRewards();
 
-                    plugin.getLogger().info("Here is the Treasure Location: "+treasureChest.getLocation());
+                inventory.addItem(rewards);
 
-                    plugin.treasureLocations.put(treasureChest.getLocation(), rewards);
-                    player.sendMessage("A treasure hunt has begun! Find the hidden treasure chest.");
-                } else {
-                    player.sendMessage("Unable to generate a treasure location. Try again later.");
-                }
+                plugin.getLogger().info("Here is the Treasure Location: "+treasureChest.getLocation());
+
+                plugin.treasureLocations.put(treasureChest.getLocation(), rewards);
+
+                new BukkitRunnable(){
+                    int countdown = 5;
+
+                    @Override
+                    public void run(){
+                        if (countdown == 0){
+                            player.sendMessage("A treasure hunt has begun! Find the hidden treasure chest.");
+                            player.sendMessage(ChatColor.GREEN +"HINT: Treasure chest is at your 50 block radius from the location where you ran the command.");
+                            cancel();
+                        }else{
+                            player.sendMessage("Treasure hunt is starting in "+countdown);
+                            countdown--;
+                        }
+                    }
+                }.runTaskTimer(plugin, 0, 20);
+
             } else {
-                sender.sendMessage("Only players can start treasure hunts.");
+                sender.sendMessage("Only Admins can start the ");
             }
+        } else {
+            sender.sendMessage("Only players can start treasure hunts.");
         }
         return true;
     }

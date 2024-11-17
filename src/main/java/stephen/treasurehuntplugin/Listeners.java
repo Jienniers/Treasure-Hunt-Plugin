@@ -1,6 +1,7 @@
 package stephen.treasurehuntplugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.block.Block;
@@ -9,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -26,8 +26,8 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
         if (block != null && plugin.treasureLocations.containsKey(block.getLocation())) {
-            player.sendMessage("You found treasure!");
-            
+            player.sendMessage(ChatColor.GREEN+"You found treasure!");
+
             FireworkCeleberation(player);
         }
     }
