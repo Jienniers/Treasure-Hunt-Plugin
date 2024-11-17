@@ -1,10 +1,10 @@
 # Treasure Hunt Plugin
 
-The Treasure Hunt plugin adds an exciting gameplay feature to Minecraft by enabling server administrators to create treasure hunts for players to participate in. Players can embark on quests to search for hidden treasures scattered throughout the world, adding a sense of adventure and exploration to their Minecraft experience.
+The Treasure Hunt plugin adds an exciting gameplay feature to Minecraft by enabling each player to participate in treasure chest quests. Players can embark on quests to search for hidden treasures, adding a sense of adventure and exploration to their Minecraft experience.
 
 ## Features
 
-- **Treasure Generation**: Randomly generates treasure chests containing valuable loot at 50x50 radius within the game world.
+- **Treasure Generation**: Randomly generates treasure chests containing valuable loot at 50x50 radius from the player's location within the game world.
 - **Reward System**: Players are rewarded with valuable items upon successfully completing a treasure hunt quest.
 
 ## Installation
