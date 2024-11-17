@@ -26,30 +26,30 @@ public class Command implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.isOp()) {
-                Location treasureLocation = generateTreasureLocation(player.getLocation());
-
-                Block block = treasureLocation.getBlock();
-                block.setType(Material.CHEST);
-
-                Chest treasureChest = (Chest) block.getState();
-
-                Inventory inventory = treasureChest.getInventory();
-                ItemStack[] rewards = generateRandomRewards();
-
-                inventory.addItem(rewards);
-
-                plugin.getLogger().info("Here is the Treasure Location: "+treasureChest.getLocation());
-
-                plugin.treasures.put(treasureChest, rewards);
-
                 new BukkitRunnable(){
                     int countdown = 5;
 
                     @Override
                     public void run(){
                         if (countdown == 0){
+                            Location treasureLocation = generateTreasureLocation(player.getLocation());
+
+                            Block block = treasureLocation.getBlock();
+                            block.setType(Material.CHEST);
+
+                            Chest treasureChest = (Chest) block.getState();
+
+                            Inventory inventory = treasureChest.getInventory();
+                            ItemStack[] rewards = generateRandomRewards();
+
+                            inventory.addItem(rewards);
+
+                            plugin.getLogger().info("Here is the Treasure Location: "+treasureChest.getLocation());
+
+                            plugin.treasures.put(treasureChest, rewards);
+
                             player.sendMessage("A treasure hunt has begun! Find the hidden treasure chest.");
-                            player.sendMessage(ChatColor.GREEN +"HINT: Treasure chest is at your 50 block radius from the location where you ran the command.");
+                            player.sendMessage(ChatColor.GREEN +"HINT: Treasure chest is at your 50 block radius from your current location.");
                             cancel();
                         }else{
                             player.sendMessage("Treasure hunt is starting in "+countdown);
